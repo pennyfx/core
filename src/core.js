@@ -347,7 +347,7 @@
         enumberable: true,
         value: function (name){
           var attr = tag.attributes[name.toLowerCase()];
-          if (!this.xtag._skipAttrƒ) removeAttribute.call(this, name);
+          if (!this.xtag._skipAttr) removeAttribute.call(this, name);
           if (attr) {
             if (attr.setter && !this.xtag._skipSet) {
               this.xtag._skipAttr = true;

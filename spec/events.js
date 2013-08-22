@@ -1,20 +1,25 @@
 
+describe("x-tag events", function () {
 
+  it('tap should tap', function(){
 
-describe("x-tag ", function () {
-  
-  var $ = document.getElementById;
-  
-  var tap = $('tap'),
-      tapCount = 0,
-      tapTimer = null;
-  
-  xtag.addEvent($('tap'), 'tap', function(){
-    
-    tapCount++;
-    tapTimer = setTimeout(function(){
-      
-    }, 1000);
+    var tap = document.getElementById('tap');
+        tapped = false;
+
+    xtag.addEvent(tap, 'tap', function(){
+      tapped = true;
+    });
+
+    waitsFor(function (){
+      return tapped;
+    }, "waiting for tap event to fire", 1000);
+
+    xtag.fireEvent(tap,'tap');
+
+    runs(function (){
+      expect(tapped).toEqual(true);
+    });
+
   });
 
 });

@@ -4,9 +4,39 @@
 	<head>
 	  <title>X-Tag: Event Tester</title>
 	  <meta charset="UTF-8">
+	  <link rel="shortcut icon" type="image/png" href="jasmine/lib/jasmine-1.2.0/jasmine_favicon.png">
+	  <link rel="stylesheet" type="text/css" href="jasmine/lib/jasmine-1.2.0/jasmine.css">
+	  <script type="text/javascript" src="jasmine/lib/jasmine-1.2.0/jasmine.js"></script>
+	  <script type="text/javascript" src="jasmine/lib/jasmine-1.2.0/jasmine-html.js"></script>
 	  <script type="text/javascript" src="../lib/web-components-polyfills.js"></script>
 	  <script type="text/javascript" src="../src/core.js"></script>
 	  <script type="text/javascript" src="../spec/events.js"></script>
+
+	  <script type="text/javascript">
+		(function() {
+		  var jasmineEnv = jasmine.getEnv();
+		  jasmineEnv.updateInterval = 1000;
+
+		  var htmlReporter = new jasmine.HtmlReporter();
+
+		  jasmineEnv.addReporter(htmlReporter);
+
+		  jasmineEnv.specFilter = function(spec) {
+			return htmlReporter.specFilter(spec);
+		  };
+
+		  var currentWindowOnload = window.onload;
+
+		  window.onload = function() {
+			if (currentWindowOnload) {
+			  currentWindowOnload();
+			}
+			jasmineEnv.execute();
+		  };
+
+
+		})();
+	  </script>
 
 	  <style type="text/css">
 		.event {
@@ -16,26 +46,26 @@
 			border: 1px solid #bbb;
 			text-align: center;
 		}
-		
-		
+
+
 		.event[result=pass] {
 			background: #D3FFD7;
 			border-color: #42A54A;
 		}
-		
+
 		.event[result=pass]:after {
 			content: ' PASSED';
 		}
-		
+
 		.event[result=fail] {
 			background: #FFD6D7;
 			border-color: #B75054;
 		}
-		
+
 		.event[result=pass]:after {
 			content: ' FAILED';
 		}
-		
+
 	  </style>
 	</head>
 
